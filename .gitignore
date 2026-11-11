@@ -1,0 +1,28 @@
+# Saida de compilacao
+out/
+bin/
+*.class
+
+# Arquivos pessoais do IntelliJ
+.idea/workspace.xml
+.idea/shelf/
+.idea/usage.statistics.xml
+.idea/dictionaries/
+.idea/httpRequests/
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/queries/
+*.iws
+
+# Arquivos do Eclipse
+.metadata/
+.settings/
+.classpath
+.project
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
