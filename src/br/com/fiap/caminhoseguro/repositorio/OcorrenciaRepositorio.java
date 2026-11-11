@@ -2,7 +2,6 @@ package br.com.fiap.caminhoseguro.repositorio;
 
 import br.com.fiap.caminhoseguro.dominio.Ocorrencia;
 import br.com.fiap.caminhoseguro.dominio.Trecho;
-import br.com.fiap.caminhoseguro.enums.TipoOcorrencia;
 
 import java.util.ArrayList;
 
@@ -82,19 +81,4 @@ public class OcorrenciaRepositorio {
         return resultado;
     }
 
-    /**
-     * Busca as ocorrencias de um tipo
-     *
-     * @param tipo tipo usado no filtro
-     * @return ocorrencias do tipo informado
-     */
-    public ArrayList<Ocorrencia> buscarPorTipo(TipoOcorrencia tipo) {
-        ArrayList<Ocorrencia> resultado = new ArrayList<Ocorrencia>();
-        for (Ocorrencia ocorrencia : ocorrencias) {
-            if (ocorrencia.getTipo() == tipo) {
-                resultado.add(ocorrencia);
-            }
-        }
-        return resultado;
-    }
 }

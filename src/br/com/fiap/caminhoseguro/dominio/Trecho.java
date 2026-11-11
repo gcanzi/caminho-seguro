@@ -14,13 +14,13 @@ import java.util.ArrayList;
  */
 public class Trecho {
 
-    private int id;
+    private final int id;
     private String nomeRua;
     private Bairro bairro;
     private int distanciaMetros;
     private Iluminacao iluminacao;
-    private double posicaoX;
-    private double posicaoY;
+    private final double posicaoX;
+    private final double posicaoY;
     private ArrayList<Ocorrencia> ocorrencias;
 
     /**
@@ -88,15 +88,6 @@ public class Trecho {
      */
     public int getId() {
         return id;
-    }
-
-    /**
-     * Altera o identificador do trecho
-     *
-     * @param id novo identificador do trecho
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**
@@ -201,30 +192,12 @@ public class Trecho {
     }
 
     /**
-     * Altera a coordenada X do trecho no plano do bairro, em metros
-     *
-     * @param posicaoX nova coordenada X do trecho no plano do bairro, em metros
-     */
-    public void setPosicaoX(double posicaoX) {
-        this.posicaoX = posicaoX;
-    }
-
-    /**
      * Devolve a coordenada Y do trecho no plano do bairro, em metros
      *
      * @return coordenada Y do trecho no plano do bairro, em metros
      */
     public double getPosicaoY() {
         return posicaoY;
-    }
-
-    /**
-     * Altera a coordenada Y do trecho no plano do bairro, em metros
-     *
-     * @param posicaoY nova coordenada Y do trecho no plano do bairro, em metros
-     */
-    public void setPosicaoY(double posicaoY) {
-        this.posicaoY = posicaoY;
     }
 
     /**

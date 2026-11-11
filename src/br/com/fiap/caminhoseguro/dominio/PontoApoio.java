@@ -11,11 +11,11 @@ import br.com.fiap.caminhoseguro.enums.TipoPontoApoio;
  */
 public abstract class PontoApoio {
 
-    private int id;
+    private final int id;
     private String nome;
     private TipoPontoApoio tipo;
-    private double posicaoX;
-    private double posicaoY;
+    private final double posicaoX;
+    private final double posicaoY;
     private int horaAbertura;
     private int horaFechamento;
 
@@ -113,15 +113,6 @@ public abstract class PontoApoio {
     }
 
     /**
-     * Altera o identificador do ponto de apoio
-     *
-     * @param id novo identificador do ponto de apoio
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
      * Devolve o nome do ponto de apoio
      *
      * @return nome do ponto de apoio
@@ -160,7 +151,7 @@ public abstract class PontoApoio {
      *
      * @throws IllegalArgumentException se o tipo for nulo
      */
-    public void setTipo(TipoPontoApoio tipo) {
+    private void setTipo(TipoPontoApoio tipo) {
         if (tipo == null) {
             throw new IllegalArgumentException("Tipo do ponto de apoio nao pode ser nulo");
         }
@@ -177,30 +168,12 @@ public abstract class PontoApoio {
     }
 
     /**
-     * Altera a coordenada X do ponto no plano do bairro, em metros
-     *
-     * @param posicaoX nova coordenada X do ponto no plano do bairro, em metros
-     */
-    public void setPosicaoX(double posicaoX) {
-        this.posicaoX = posicaoX;
-    }
-
-    /**
      * Devolve a coordenada Y do ponto no plano do bairro, em metros
      *
      * @return coordenada Y do ponto no plano do bairro, em metros
      */
     public double getPosicaoY() {
         return posicaoY;
-    }
-
-    /**
-     * Altera a coordenada Y do ponto no plano do bairro, em metros
-     *
-     * @param posicaoY nova coordenada Y do ponto no plano do bairro, em metros
-     */
-    public void setPosicaoY(double posicaoY) {
-        this.posicaoY = posicaoY;
     }
 
     /**

@@ -1,7 +1,6 @@
 package br.com.fiap.caminhoseguro.repositorio;
 
 import br.com.fiap.caminhoseguro.dominio.PontoApoio;
-import br.com.fiap.caminhoseguro.enums.TipoPontoApoio;
 
 import java.util.ArrayList;
 
@@ -64,19 +63,4 @@ public class PontoApoioRepositorio {
         return null;
     }
 
-    /**
-     * Busca os pontos de apoio de um tipo
-     *
-     * @param tipo tipo usado no filtro
-     * @return pontos do tipo informado
-     */
-    public ArrayList<PontoApoio> buscarPorTipo(TipoPontoApoio tipo) {
-        ArrayList<PontoApoio> resultado = new ArrayList<PontoApoio>();
-        for (PontoApoio ponto : pontos) {
-            if (ponto.getTipo() == tipo) {
-                resultado.add(ponto);
-            }
-        }
-        return resultado;
-    }
 }

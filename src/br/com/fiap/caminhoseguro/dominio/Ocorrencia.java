@@ -17,7 +17,7 @@ public abstract class Ocorrencia {
 
     private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-    private int id;
+    private final int id;
     private Trecho trecho;
     private TipoOcorrencia tipo;
     private LocalDateTime dataHora;
@@ -80,15 +80,6 @@ public abstract class Ocorrencia {
     }
 
     /**
-     * Altera o identificador da ocorrencia
-     *
-     * @param id novo identificador da ocorrencia
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
      * Devolve o trecho onde a ocorrencia aconteceu
      *
      * @return trecho onde a ocorrencia aconteceu
@@ -104,7 +95,7 @@ public abstract class Ocorrencia {
      *
      * @throws IllegalArgumentException se o trecho for nulo
      */
-    public void setTrecho(Trecho trecho) {
+    private void setTrecho(Trecho trecho) {
         if (trecho == null) {
             throw new IllegalArgumentException("Trecho da ocorrencia nao pode ser nulo");
         }

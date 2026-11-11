@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class RotaConsultada {
 
-    private int id;
+    private final int id;
     private String descricao;
     private ArrayList<Trecho> trechos;
     private double notaSeguranca;
@@ -87,15 +87,6 @@ public class RotaConsultada {
      */
     public int getId() {
         return id;
-    }
-
-    /**
-     * Altera o identificador da rota
-     *
-     * @param id novo identificador da rota
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**

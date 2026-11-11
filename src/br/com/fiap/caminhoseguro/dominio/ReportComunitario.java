@@ -130,7 +130,7 @@ public class ReportComunitario extends Ocorrencia {
      *
      * @throws IllegalArgumentException se o autor for nulo
      */
-    public void setAutor(Usuario autor) {
+    private void setAutor(Usuario autor) {
         if (autor == null) {
             throw new IllegalArgumentException("Autor do report nao pode ser nulo");
         }
@@ -146,12 +146,4 @@ public class ReportComunitario extends Ocorrencia {
         return confirmacoes.size();
     }
 
-    /**
-     * Devolve uma copia da lista de quem confirmou o report
-     *
-     * @return copia das confirmacoes
-     */
-    public ArrayList<Usuario> getConfirmacoes() {
-        return new ArrayList<Usuario>(confirmacoes);
-    }
 }

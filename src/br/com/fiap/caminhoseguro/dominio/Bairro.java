@@ -9,7 +9,7 @@ package br.com.fiap.caminhoseguro.dominio;
  */
 public class Bairro {
 
-    private int id;
+    private final int id;
     private String nome;
     private String cidade;
 
@@ -35,15 +35,6 @@ public class Bairro {
      */
     public int getId() {
         return id;
-    }
-
-    /**
-     * Altera o identificador do bairro
-     *
-     * @param id novo identificador do bairro
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**

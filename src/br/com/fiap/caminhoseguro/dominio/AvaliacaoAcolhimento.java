@@ -9,7 +9,7 @@ package br.com.fiap.caminhoseguro.dominio;
  */
 public class AvaliacaoAcolhimento {
 
-    private int id;
+    private final int id;
     private int nota;
     private String comentario;
 
@@ -35,15 +35,6 @@ public class AvaliacaoAcolhimento {
      */
     public int getId() {
         return id;
-    }
-
-    /**
-     * Altera o identificador da avaliacao
-     *
-     * @param id novo identificador da avaliacao
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**

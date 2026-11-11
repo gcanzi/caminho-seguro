@@ -9,7 +9,7 @@ package br.com.fiap.caminhoseguro.dominio;
  */
 public class Usuario {
 
-    private int id;
+    private final int id;
     private String apelido;
     private PerfilDeslocamento perfil;
 
@@ -35,15 +35,6 @@ public class Usuario {
      */
     public int getId() {
         return id;
-    }
-
-    /**
-     * Altera o identificador do usuario
-     *
-     * @param id novo identificador do usuario
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**
