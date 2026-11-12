@@ -1,4 +1,4 @@
-package br.com.fiap.caminhoseguro.dominio;
+package br.com.fiap.caminhoseguro.util;
 
 /**
  * Regras de horario usadas no dominio: validar a hora e saber se e noite

@@ -1,5 +1,8 @@
 package br.com.fiap.caminhoseguro.dominio;
 
+import br.com.fiap.caminhoseguro.util.Formatacao;
+import br.com.fiap.caminhoseguro.util.Validacao;
+
 import java.util.ArrayList;
 
 /**

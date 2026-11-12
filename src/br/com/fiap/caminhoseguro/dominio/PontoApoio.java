@@ -1,6 +1,8 @@
 package br.com.fiap.caminhoseguro.dominio;
 
 import br.com.fiap.caminhoseguro.enums.TipoPontoApoio;
+import br.com.fiap.caminhoseguro.util.Horario;
+import br.com.fiap.caminhoseguro.util.Validacao;
 
 /**
  * Ponto Seguro onde a pessoa pode pedir ajuda, com posicao e horario de funcionamento

@@ -3,7 +3,7 @@ package br.com.fiap.caminhoseguro.servico;
 import br.com.fiap.caminhoseguro.dominio.PerfilDeslocamento;
 import br.com.fiap.caminhoseguro.dominio.RotaConsultada;
 import br.com.fiap.caminhoseguro.dominio.Trecho;
-import br.com.fiap.caminhoseguro.dominio.Validacao;
+import br.com.fiap.caminhoseguro.util.Validacao;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

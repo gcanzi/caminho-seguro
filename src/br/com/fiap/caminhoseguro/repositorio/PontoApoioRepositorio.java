@@ -1,7 +1,7 @@
 package br.com.fiap.caminhoseguro.repositorio;
 
 import br.com.fiap.caminhoseguro.dominio.PontoApoio;
-import br.com.fiap.caminhoseguro.dominio.Validacao;
+import br.com.fiap.caminhoseguro.util.Validacao;
 
 import java.util.ArrayList;
 

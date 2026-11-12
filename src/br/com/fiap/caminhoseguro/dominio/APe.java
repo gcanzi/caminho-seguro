@@ -1,6 +1,7 @@
 package br.com.fiap.caminhoseguro.dominio;
 
 import br.com.fiap.caminhoseguro.enums.Iluminacao;
+import br.com.fiap.caminhoseguro.util.Horario;
 
 /**
  * Perfil de quem caminha: a iluminacao ruim a noite pesa mais

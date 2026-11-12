@@ -1,5 +1,7 @@
 package br.com.fiap.caminhoseguro.dominio;
 
+import br.com.fiap.caminhoseguro.util.Validacao;
+
 /**
  * Pessoa que usa o app, identificada so por um apelido, sem dados pessoais reais
  *

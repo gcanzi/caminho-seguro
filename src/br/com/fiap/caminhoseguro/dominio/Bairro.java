@@ -1,5 +1,7 @@
 package br.com.fiap.caminhoseguro.dominio;
 
+import br.com.fiap.caminhoseguro.util.Validacao;
+
 /**
  * Bairro atendido pelo piloto do Caminho Seguro
  *

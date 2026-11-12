@@ -2,6 +2,7 @@ package br.com.fiap.caminhoseguro.dominio;
 
 import br.com.fiap.caminhoseguro.enums.Iluminacao;
 import br.com.fiap.caminhoseguro.enums.TipoOcorrencia;
+import br.com.fiap.caminhoseguro.util.Validacao;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package br.com.fiap.caminhoseguro.dominio;
+package br.com.fiap.caminhoseguro.util;
 
 /**
  * Validacoes reutilizadas pelos setters e servicos; todas lancam IllegalArgumentException

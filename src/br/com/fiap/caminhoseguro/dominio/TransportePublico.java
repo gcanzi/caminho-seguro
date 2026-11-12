@@ -1,6 +1,7 @@
 package br.com.fiap.caminhoseguro.dominio;
 
 import br.com.fiap.caminhoseguro.enums.TipoOcorrencia;
+import br.com.fiap.caminhoseguro.util.Horario;
 
 /**
  * Perfil de quem usa onibus ou metro: so caminha ate o ponto, mas local deserto a noite pesa mais

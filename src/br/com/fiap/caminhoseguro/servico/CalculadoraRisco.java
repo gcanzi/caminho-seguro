@@ -1,10 +1,10 @@
 package br.com.fiap.caminhoseguro.servico;
 
-import br.com.fiap.caminhoseguro.dominio.Horario;
 import br.com.fiap.caminhoseguro.dominio.Ocorrencia;
 import br.com.fiap.caminhoseguro.dominio.PerfilDeslocamento;
 import br.com.fiap.caminhoseguro.dominio.Trecho;
 import br.com.fiap.caminhoseguro.enums.Iluminacao;
+import br.com.fiap.caminhoseguro.util.Horario;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

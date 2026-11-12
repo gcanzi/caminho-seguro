@@ -38,9 +38,10 @@ Projeto da Global Solution FIAP 2026.2 (CitizenTech), disciplina **Domain Driven
 ```
 src/br/com/fiap/caminhoseguro
 ├── enums        tipos fixos do domínio
-├── dominio      entidades, regras de negócio e utilitários
+├── dominio      entidades e regras de negócio
 ├── repositorio  listas em memória com busca
 ├── servico      cálculo de risco, comparação de rotas e busca de Ponto Seguro
+├── util         apoio técnico: validação, formatação e horário
 └── app          cenário simulado e execução
 ```
 
@@ -59,9 +60,6 @@ src/br/com/fiap/caminhoseguro
 - `PontoApoio` (abstrata), `OrgaoPublico` e `EstabelecimentoParceiro`: cada tipo define a prioridade e se pode ser sugerido.
 - `AvaliacaoAcolhimento`: nota anônima de 1 a 5 dada a um estabelecimento parceiro.
 - `RotaConsultada`: rota candidata formada por trechos, com a nota de segurança e os motivos.
-- `Horario`: valida a hora e diz se é noite.
-- `Validacao`: validações reutilizadas pelos setters (obrigatório, texto obrigatório e faixa de valores).
-- `Formatacao`: números com vírgula decimal e a barra de nota `[#######---]`.
 
 **repositorio**
 - `TrechoRepositorio`, `OcorrenciaRepositorio` e `PontoApoioRepositorio`: guardam os objetos em `ArrayList`, recusam id repetido e fazem buscas por id, trecho e bairro.
@@ -70,6 +68,11 @@ src/br/com/fiap/caminhoseguro
 - `CalculadoraRisco`: calcula o risco de 0 a 10 de um trecho e explica os motivos.
 - `Roteirizador`: avalia as rotas candidatas e escolhe a mais rápida, a mais segura e a equilibrada.
 - `BuscadorPontoApoio`: encontra o Ponto Seguro mais próximo e explica descartes e desempates.
+
+**util**
+- `Validacao`: validações reutilizadas pelos setters (obrigatório, texto obrigatório e faixa de valores).
+- `Formatacao`: números com vírgula decimal e a barra de nota `[#######---]`.
+- `Horario`: valida a hora e diz se é noite.
 
 **app**
 - `CenarioBelaVista`: monta os dados simulados, com 8 trechos, 3 usuários, 9 ocorrências, 3 rotas e 8 pontos de apoio.

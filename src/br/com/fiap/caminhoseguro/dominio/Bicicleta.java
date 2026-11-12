@@ -1,6 +1,7 @@
 package br.com.fiap.caminhoseguro.dominio;
 
 import br.com.fiap.caminhoseguro.enums.TipoOcorrencia;
+import br.com.fiap.caminhoseguro.util.Horario;
 
 /**
  * Perfil de quem pedala: ocorrencias de acidente pesam mais

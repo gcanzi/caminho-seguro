@@ -1,7 +1,6 @@
 package br.com.fiap.caminhoseguro.app;
 
 import br.com.fiap.caminhoseguro.dominio.AvaliacaoAcolhimento;
-import br.com.fiap.caminhoseguro.dominio.Formatacao;
 import br.com.fiap.caminhoseguro.dominio.Ocorrencia;
 import br.com.fiap.caminhoseguro.dominio.OcorrenciaOficial;
 import br.com.fiap.caminhoseguro.dominio.PontoApoio;
@@ -14,6 +13,7 @@ import br.com.fiap.caminhoseguro.enums.TipoOcorrencia;
 import br.com.fiap.caminhoseguro.servico.BuscadorPontoApoio;
 import br.com.fiap.caminhoseguro.servico.CalculadoraRisco;
 import br.com.fiap.caminhoseguro.servico.Roteirizador;
+import br.com.fiap.caminhoseguro.util.Formatacao;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

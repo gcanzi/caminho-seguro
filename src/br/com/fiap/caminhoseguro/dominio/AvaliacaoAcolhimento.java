@@ -1,5 +1,7 @@
 package br.com.fiap.caminhoseguro.dominio;
 
+import br.com.fiap.caminhoseguro.util.Validacao;
+
 /**
  * Avaliacao anonima de como um estabelecimento parceiro acolheu quem pediu ajuda
  *
