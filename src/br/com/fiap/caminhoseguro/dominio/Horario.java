@@ -25,9 +25,7 @@ public class Horario {
      * @throws IllegalArgumentException se a hora estiver fora de 0 a 23
      */
     public static void validarHora(int hora) {
-        if (hora < 0 || hora > 23) {
-            throw new IllegalArgumentException("Hora deve estar entre 0 e 23, recebido: " + hora);
-        }
+        Validacao.faixa(hora, 0, 23, "Hora");
     }
 
     /**

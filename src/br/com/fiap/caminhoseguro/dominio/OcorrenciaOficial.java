@@ -73,9 +73,7 @@ public class OcorrenciaOficial extends Ocorrencia {
      * @throws IllegalArgumentException se a fonte estiver vazia
      */
     public void setFonte(String fonte) {
-        if (fonte == null || fonte.trim().isEmpty()) {
-            throw new IllegalArgumentException("Fonte da ocorrencia oficial nao pode ser vazia");
-        }
+        Validacao.textoObrigatorio(fonte, "Fonte da ocorrencia oficial nao pode ser vazia");
         this.fonte = fonte;
     }
 
@@ -96,9 +94,7 @@ public class OcorrenciaOficial extends Ocorrencia {
      * @throws IllegalArgumentException se a gravidade estiver fora de 1 a 5
      */
     public void setGravidade(int gravidade) {
-        if (gravidade < 1 || gravidade > 5) {
-            throw new IllegalArgumentException("Gravidade deve estar entre 1 e 5, recebido: " + gravidade);
-        }
+        Validacao.faixa(gravidade, 1, 5, "Gravidade");
         this.gravidade = gravidade;
     }
 }

@@ -96,9 +96,7 @@ public abstract class Ocorrencia {
      * @throws IllegalArgumentException se o trecho for nulo
      */
     private void setTrecho(Trecho trecho) {
-        if (trecho == null) {
-            throw new IllegalArgumentException("Trecho da ocorrencia nao pode ser nulo");
-        }
+        Validacao.obrigatorio(trecho, "Trecho da ocorrencia nao pode ser nulo");
         this.trecho = trecho;
     }
 
@@ -119,9 +117,7 @@ public abstract class Ocorrencia {
      * @throws IllegalArgumentException se o tipo for nulo
      */
     public void setTipo(TipoOcorrencia tipo) {
-        if (tipo == null) {
-            throw new IllegalArgumentException("Tipo da ocorrencia nao pode ser nulo");
-        }
+        Validacao.obrigatorio(tipo, "Tipo da ocorrencia nao pode ser nulo");
         this.tipo = tipo;
     }
 
@@ -142,9 +138,7 @@ public abstract class Ocorrencia {
      * @throws IllegalArgumentException se a data e hora forem nulas
      */
     public void setDataHora(LocalDateTime dataHora) {
-        if (dataHora == null) {
-            throw new IllegalArgumentException("Data e hora da ocorrencia nao podem ser nulas");
-        }
+        Validacao.obrigatorio(dataHora, "Data e hora da ocorrencia nao podem ser nulas");
         this.dataHora = dataHora;
     }
 

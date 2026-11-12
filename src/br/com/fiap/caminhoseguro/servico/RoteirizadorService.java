@@ -3,6 +3,7 @@ package br.com.fiap.caminhoseguro.servico;
 import br.com.fiap.caminhoseguro.dominio.PerfilDeslocamento;
 import br.com.fiap.caminhoseguro.dominio.RotaConsultada;
 import br.com.fiap.caminhoseguro.dominio.Trecho;
+import br.com.fiap.caminhoseguro.dominio.Validacao;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,9 +29,7 @@ public class RoteirizadorService {
      * @throws IllegalArgumentException se a calculadora for nula
      */
     public RoteirizadorService(CalculadoraRisco calculadora) {
-        if (calculadora == null) {
-            throw new IllegalArgumentException("Calculadora de risco nao pode ser nula");
-        }
+        Validacao.obrigatorio(calculadora, "Calculadora de risco nao pode ser nula");
         this.calculadora = calculadora;
     }
 
@@ -46,9 +45,7 @@ public class RoteirizadorService {
      * @throws IllegalArgumentException se a rota for nula ou nao tiver trechos
      */
     public double calcularRiscoMedio(RotaConsultada rota, int hora, LocalDateTime agora, PerfilDeslocamento perfil) {
-        if (rota == null) {
-            throw new IllegalArgumentException("Rota nao pode ser nula");
-        }
+        Validacao.obrigatorio(rota, "Rota nao pode ser nula");
         int distanciaTotal = rota.calcularDistanciaTotal();
         if (distanciaTotal == 0) {
             throw new IllegalArgumentException("A rota " + rota.getDescricao() + " nao tem trechos");

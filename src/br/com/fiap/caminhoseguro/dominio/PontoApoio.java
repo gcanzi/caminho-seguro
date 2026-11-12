@@ -129,9 +129,7 @@ public abstract class PontoApoio {
      * @throws IllegalArgumentException se o nome estiver vazio
      */
     public void setNome(String nome) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome do ponto de apoio nao pode ser vazio");
-        }
+        Validacao.textoObrigatorio(nome, "Nome do ponto de apoio nao pode ser vazio");
         this.nome = nome;
     }
 
@@ -152,9 +150,7 @@ public abstract class PontoApoio {
      * @throws IllegalArgumentException se o tipo for nulo
      */
     private void setTipo(TipoPontoApoio tipo) {
-        if (tipo == null) {
-            throw new IllegalArgumentException("Tipo do ponto de apoio nao pode ser nulo");
-        }
+        Validacao.obrigatorio(tipo, "Tipo do ponto de apoio nao pode ser nulo");
         this.tipo = tipo;
     }
 

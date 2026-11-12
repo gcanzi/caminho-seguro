@@ -52,9 +52,7 @@ public class EstabelecimentoParceiro extends PontoApoio {
      * @throws IllegalArgumentException se a avaliacao for nula
      */
     public void adicionarAvaliacao(AvaliacaoAcolhimento avaliacao) {
-        if (avaliacao == null) {
-            throw new IllegalArgumentException("Avaliacao nao pode ser nula");
-        }
+        Validacao.obrigatorio(avaliacao, "Avaliacao nao pode ser nula");
         avaliacoes.add(avaliacao);
     }
 

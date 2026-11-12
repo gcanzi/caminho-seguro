@@ -1,6 +1,7 @@
 package br.com.fiap.caminhoseguro.repositorio;
 
 import br.com.fiap.caminhoseguro.dominio.PontoApoio;
+import br.com.fiap.caminhoseguro.dominio.Validacao;
 
 import java.util.ArrayList;
 
@@ -30,9 +31,7 @@ public class PontoApoioRepositorio {
      * @throws IllegalArgumentException se o ponto for nulo ou o id ja existir
      */
     public void adicionar(PontoApoio ponto) {
-        if (ponto == null) {
-            throw new IllegalArgumentException("Ponto de apoio nao pode ser nulo");
-        }
+        Validacao.obrigatorio(ponto, "Ponto de apoio nao pode ser nulo");
         if (buscarPorId(ponto.getId()) != null) {
             throw new IllegalArgumentException("Ja existe um ponto de apoio com o id " + ponto.getId());
         }

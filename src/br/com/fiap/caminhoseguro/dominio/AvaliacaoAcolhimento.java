@@ -54,9 +54,7 @@ public class AvaliacaoAcolhimento {
      * @throws IllegalArgumentException se a nota estiver fora de 1 a 5
      */
     public void setNota(int nota) {
-        if (nota < 1 || nota > 5) {
-            throw new IllegalArgumentException("Nota da avaliacao deve estar entre 1 e 5, recebido: " + nota);
-        }
+        Validacao.faixa(nota, 1, 5, "Nota da avaliacao");
         this.nota = nota;
     }
 

@@ -54,9 +54,7 @@ public class Bairro {
      * @throws IllegalArgumentException se o nome estiver vazio
      */
     public void setNome(String nome) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome do bairro não pode ser vazio");
-        }
+        Validacao.textoObrigatorio(nome, "Nome do bairro nao pode ser vazio");
         this.nome = nome;
     }
 
@@ -77,9 +75,7 @@ public class Bairro {
      * @throws IllegalArgumentException se a cidade estiver vazia
      */
     public void setCidade(String cidade) {
-        if (cidade == null || cidade.trim().isEmpty()) {
-            throw new IllegalArgumentException("Cidade do bairro não pode ser vazia");
-        }
+        Validacao.textoObrigatorio(cidade, "Cidade do bairro nao pode ser vazia");
         this.cidade = cidade;
     }
 

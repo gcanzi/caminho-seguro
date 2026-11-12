@@ -54,9 +54,7 @@ public class Usuario {
      * @throws IllegalArgumentException se o apelido estiver vazio
      */
     public void setApelido(String apelido) {
-        if (apelido == null || apelido.trim().isEmpty()) {
-            throw new IllegalArgumentException("Apelido do usuario nao pode ser vazio");
-        }
+        Validacao.textoObrigatorio(apelido, "Apelido do usuario nao pode ser vazio");
         this.apelido = apelido;
     }
 
@@ -77,9 +75,7 @@ public class Usuario {
      * @throws IllegalArgumentException se o perfil for nulo
      */
     public void setPerfil(PerfilDeslocamento perfil) {
-        if (perfil == null) {
-            throw new IllegalArgumentException("Perfil de deslocamento nao pode ser nulo");
-        }
+        Validacao.obrigatorio(perfil, "Perfil de deslocamento nao pode ser nulo");
         this.perfil = perfil;
     }
 

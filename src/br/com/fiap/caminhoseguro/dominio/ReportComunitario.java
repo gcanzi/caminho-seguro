@@ -45,11 +45,9 @@ public class ReportComunitario extends Ocorrencia {
      * @throws IllegalArgumentException se o usuario for nulo, for o autor do report ou ja tiver confirmado
      */
     public void confirmar(Usuario usuario) {
-        if (usuario == null) {
-            throw new IllegalArgumentException("Usuario da confirmacao não pode ser nulo");
-        }
+        Validacao.obrigatorio(usuario, "Usuario da confirmacao nao pode ser nulo");
         if (usuario.getId() == autor.getId()) {
-            throw new IllegalArgumentException("O autor não pode confirmar o proprio report");
+            throw new IllegalArgumentException("O autor nao pode confirmar o proprio report");
         }
         for (Usuario confirmacao : confirmacoes) {
             if (confirmacao.getId() == usuario.getId()) {
@@ -131,9 +129,7 @@ public class ReportComunitario extends Ocorrencia {
      * @throws IllegalArgumentException se o autor for nulo
      */
     private void setAutor(Usuario autor) {
-        if (autor == null) {
-            throw new IllegalArgumentException("Autor do report nao pode ser nulo");
-        }
+        Validacao.obrigatorio(autor, "Autor do report nao pode ser nulo");
         this.autor = autor;
     }
 

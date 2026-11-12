@@ -2,6 +2,7 @@ package br.com.fiap.caminhoseguro.repositorio;
 
 import br.com.fiap.caminhoseguro.dominio.Ocorrencia;
 import br.com.fiap.caminhoseguro.dominio.Trecho;
+import br.com.fiap.caminhoseguro.dominio.Validacao;
 
 import java.util.ArrayList;
 
@@ -31,9 +32,7 @@ public class OcorrenciaRepositorio {
      * @throws IllegalArgumentException se a ocorrencia for nula ou o id ja existir
      */
     public void adicionar(Ocorrencia ocorrencia) {
-        if (ocorrencia == null) {
-            throw new IllegalArgumentException("Ocorrencia nao pode ser nula");
-        }
+        Validacao.obrigatorio(ocorrencia, "Ocorrencia nao pode ser nula");
         if (buscarPorId(ocorrencia.getId()) != null) {
             throw new IllegalArgumentException("Ja existe uma ocorrencia com o id " + ocorrencia.getId());
         }

@@ -56,9 +56,7 @@ public class Trecho {
      * @throws IllegalArgumentException se a ocorrencia for nula ou pertencer a outro trecho
      */
     public void adicionarOcorrencia(Ocorrencia ocorrencia) {
-        if (ocorrencia == null) {
-            throw new IllegalArgumentException("Ocorrencia nao pode ser nula");
-        }
+        Validacao.obrigatorio(ocorrencia, "Ocorrencia nao pode ser nula");
         if (ocorrencia.getTrecho() != this) {
             throw new IllegalArgumentException("A ocorrencia " + ocorrencia.getId() + " pertence a outro trecho");
         }
@@ -107,9 +105,7 @@ public class Trecho {
      * @throws IllegalArgumentException se o nome estiver vazio
      */
     public void setNomeRua(String nomeRua) {
-        if (nomeRua == null || nomeRua.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome da rua nao pode ser vazio");
-        }
+        Validacao.textoObrigatorio(nomeRua, "Nome da rua nao pode ser vazio");
         this.nomeRua = nomeRua;
     }
 
@@ -130,9 +126,7 @@ public class Trecho {
      * @throws IllegalArgumentException se o bairro for nulo
      */
     public void setBairro(Bairro bairro) {
-        if (bairro == null) {
-            throw new IllegalArgumentException("Bairro do trecho nao pode ser nulo");
-        }
+        Validacao.obrigatorio(bairro, "Bairro do trecho nao pode ser nulo");
         this.bairro = bairro;
     }
 
@@ -176,9 +170,7 @@ public class Trecho {
      * @throws IllegalArgumentException se a iluminacao for nula
      */
     public void setIluminacao(Iluminacao iluminacao) {
-        if (iluminacao == null) {
-            throw new IllegalArgumentException("Iluminacao do trecho nao pode ser nula");
-        }
+        Validacao.obrigatorio(iluminacao, "Iluminacao do trecho nao pode ser nula");
         this.iluminacao = iluminacao;
     }
 

@@ -40,9 +40,7 @@ public class RotaConsultada {
      * @throws IllegalArgumentException se o trecho for nulo
      */
     public void adicionarTrecho(Trecho trecho) {
-        if (trecho == null) {
-            throw new IllegalArgumentException("Trecho da rota nao pode ser nulo");
-        }
+        Validacao.obrigatorio(trecho, "Trecho da rota nao pode ser nulo");
         trechos.add(trecho);
     }
 
@@ -67,9 +65,7 @@ public class RotaConsultada {
      * @throws IllegalArgumentException se o motivo estiver vazio
      */
     public void adicionarMotivo(String motivo) {
-        if (motivo == null || motivo.trim().isEmpty()) {
-            throw new IllegalArgumentException("Motivo nao pode ser vazio");
-        }
+        Validacao.textoObrigatorio(motivo, "Motivo nao pode ser vazio");
         motivos.add(motivo);
     }
 
@@ -106,9 +102,7 @@ public class RotaConsultada {
      * @throws IllegalArgumentException se a descricao estiver vazia
      */
     public void setDescricao(String descricao) {
-        if (descricao == null || descricao.trim().isEmpty()) {
-            throw new IllegalArgumentException("Descricao da rota nao pode ser vazia");
-        }
+        Validacao.textoObrigatorio(descricao, "Descricao da rota nao pode ser vazia");
         this.descricao = descricao;
     }
 
@@ -129,9 +123,7 @@ public class RotaConsultada {
      * @throws IllegalArgumentException se a nota estiver fora de 0 a 100
      */
     public void setNotaSeguranca(double notaSeguranca) {
-        if (notaSeguranca < 0 || notaSeguranca > 100) {
-            throw new IllegalArgumentException("Nota de seguranca deve estar entre 0 e 100, recebido: " + notaSeguranca);
-        }
+        Validacao.faixa(notaSeguranca, 0, 100, "Nota de seguranca");
         this.notaSeguranca = notaSeguranca;
     }
 

@@ -2,6 +2,7 @@ package br.com.fiap.caminhoseguro.repositorio;
 
 import br.com.fiap.caminhoseguro.dominio.Bairro;
 import br.com.fiap.caminhoseguro.dominio.Trecho;
+import br.com.fiap.caminhoseguro.dominio.Validacao;
 
 import java.util.ArrayList;
 
@@ -31,9 +32,7 @@ public class TrechoRepositorio {
      * @throws IllegalArgumentException se o trecho for nulo ou o id ja existir
      */
     public void adicionar(Trecho trecho) {
-        if (trecho == null) {
-            throw new IllegalArgumentException("Trecho nao pode ser nulo");
-        }
+        Validacao.obrigatorio(trecho, "Trecho nao pode ser nulo");
         if (buscarPorId(trecho.getId()) != null) {
             throw new IllegalArgumentException("Ja existe um trecho com o id " + trecho.getId());
         }

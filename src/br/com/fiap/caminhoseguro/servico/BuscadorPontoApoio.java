@@ -2,6 +2,7 @@ package br.com.fiap.caminhoseguro.servico;
 
 import br.com.fiap.caminhoseguro.dominio.EstabelecimentoParceiro;
 import br.com.fiap.caminhoseguro.dominio.PontoApoio;
+import br.com.fiap.caminhoseguro.dominio.Validacao;
 import br.com.fiap.caminhoseguro.repositorio.PontoApoioRepositorio;
 
 import java.util.ArrayList;
@@ -28,9 +29,7 @@ public class BuscadorPontoApoio {
      * @throws IllegalArgumentException se o repositorio for nulo
      */
     public BuscadorPontoApoio(PontoApoioRepositorio repositorio) {
-        if (repositorio == null) {
-            throw new IllegalArgumentException("Repositorio de pontos de apoio nao pode ser nulo");
-        }
+        Validacao.obrigatorio(repositorio, "Repositorio de pontos de apoio nao pode ser nulo");
         this.repositorio = repositorio;
     }
 
