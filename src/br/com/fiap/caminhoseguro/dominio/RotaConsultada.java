@@ -153,6 +153,6 @@ public class RotaConsultada {
     @Override
     public String toString() {
         return descricao + " - " + calcularDistanciaTotal() + " m, nota "
-                + String.format("%.1f", notaSeguranca) + "/100";
+                + Formatacao.decimal(notaSeguranca) + "/100";
     }
 }

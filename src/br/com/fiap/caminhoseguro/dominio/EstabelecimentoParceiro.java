@@ -91,7 +91,7 @@ public class EstabelecimentoParceiro extends PontoApoio {
         if (!verificado) {
             return "nao verificado";
         } else if (estaSuspenso()) {
-            return "suspenso (media " + String.format("%.1f", calcularMediaAvaliacoes()) + " em "
+            return "suspenso (media " + Formatacao.decimal(calcularMediaAvaliacoes()) + " em "
                     + avaliacoes.size() + " avaliacoes)";
         } else {
             return "verificado";

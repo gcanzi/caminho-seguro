@@ -1,5 +1,6 @@
 package br.com.fiap.caminhoseguro.servico;
 
+import br.com.fiap.caminhoseguro.dominio.Formatacao;
 import br.com.fiap.caminhoseguro.dominio.PontoApoio;
 import br.com.fiap.caminhoseguro.dominio.Validacao;
 import br.com.fiap.caminhoseguro.repositorio.PontoApoioRepositorio;
@@ -67,6 +68,34 @@ public class BuscadorPontoApoio {
             }
         }
         return melhor;
+    }
+
+    /**
+     * Explica por que pontos disponiveis e mais proximos que o sugerido perderam no desempate
+     *
+     * @param x coordenada X da pessoa, em metros
+     * @param y coordenada Y da pessoa, em metros
+     * @param hora hora do pedido de ajuda, de 0 a 23
+     * @return lista com cada ponto mais proximo que ficou de fora e o motivo; vazia se nao houver
+     *
+     * @throws IllegalArgumentException se a hora estiver fora de 0 a 23
+     */
+    public ArrayList<String> explicarDesempate(double x, double y, int hora) {
+        ArrayList<String> explicacoes = new ArrayList<String>();
+        PontoApoio sugerido = buscarMaisProximo(x, y, hora);
+        if (sugerido == null) {
+            return explicacoes;
+        }
+        double distanciaSugerido = sugerido.calcularDistancia(x, y);
+        for (PontoApoio ponto : repositorio.listarTodos()) {
+            if (ponto != sugerido && ponto.estaAberto(hora) && ponto.podeSerSugerido()
+                    && ponto.calcularDistancia(x, y) < distanciaSugerido) {
+                explicacoes.add(ponto.getNome() + " fica a " + Formatacao.decimal(ponto.calcularDistancia(x, y))
+                        + " m: distancia parecida, entao o ponto de maior prioridade (" + sugerido.descreverSituacao()
+                        + ") tem preferencia");
+            }
+        }
+        return explicacoes;
     }
 
     /**
