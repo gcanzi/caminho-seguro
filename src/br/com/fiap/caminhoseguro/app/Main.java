@@ -22,7 +22,7 @@ import br.com.fiap.caminhoseguro.repositorio.PontoApoioRepositorio;
 import br.com.fiap.caminhoseguro.repositorio.TrechoRepositorio;
 import br.com.fiap.caminhoseguro.servico.BuscadorPontoApoio;
 import br.com.fiap.caminhoseguro.servico.CalculadoraRisco;
-import br.com.fiap.caminhoseguro.servico.RoteirizadorService;
+import br.com.fiap.caminhoseguro.servico.Roteirizador;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -192,7 +192,7 @@ public class Main {
         rotas.add(rotaBrigadeiro);
         rotas.add(rotaSantos);
 
-        RoteirizadorService roteirizador = new RoteirizadorService(calculadora);
+        Roteirizador roteirizador = new Roteirizador(calculadora);
 
         // primeiro a Lua, a pe, com os motivos de cada rota
         imprimirRotas(roteirizador, rotas, lua, agora23, true);
@@ -325,7 +325,7 @@ public class Main {
      * @param agora data e hora da consulta
      * @param mostrarMotivos true para imprimir os motivos de cada rota
      */
-    private static void imprimirRotas(RoteirizadorService roteirizador, ArrayList<RotaConsultada> rotas,
+    private static void imprimirRotas(Roteirizador roteirizador, ArrayList<RotaConsultada> rotas,
                                       Usuario usuario, LocalDateTime agora, boolean mostrarMotivos) {
         int hora = agora.getHour();
         roteirizador.avaliarRotas(rotas, hora, agora, usuario.getPerfil());

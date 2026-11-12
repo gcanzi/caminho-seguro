@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @since 1.0
  */
-public class RoteirizadorService {
+public class Roteirizador {
 
     /** Maior nota de seguranca de uma rota, quando o risco e 0 */
     public static final double NOTA_MAXIMA = 100.0;
@@ -33,7 +33,7 @@ public class RoteirizadorService {
      *
      * @throws IllegalArgumentException se a calculadora for nula
      */
-    public RoteirizadorService(CalculadoraRisco calculadora) {
+    public Roteirizador(CalculadoraRisco calculadora) {
         Validacao.obrigatorio(calculadora, "Calculadora de risco nao pode ser nula");
         this.calculadora = calculadora;
     }
