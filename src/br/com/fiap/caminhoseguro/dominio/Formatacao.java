@@ -13,6 +13,8 @@ public class Formatacao {
 
     /** Padrao brasileiro, usado para a virgula decimal sair igual em qualquer computador */
     public static final Locale BRASIL = Locale.forLanguageTag("pt-BR");
+    /** Quantidade de caracteres da barra de nota */
+    public static final int TAMANHO_BARRA = 10;
 
     private Formatacao() {
     }
@@ -25,5 +27,25 @@ public class Formatacao {
      */
     public static String decimal(double valor) {
         return String.format(BRASIL, "%.1f", valor);
+    }
+
+    /**
+     * Desenha uma barra de texto proporcional ao valor, como [#######---] para 70 de 100
+     *
+     * @param valor valor a ser desenhado, de 0 ate o maximo
+     * @param maximo valor que enche a barra inteira
+     * @return barra com # para a parte cheia e - para a parte vazia
+     */
+    public static String barra(double valor, double maximo) {
+        int cheios = (int) Math.round(valor / maximo * TAMANHO_BARRA);
+        String barra = "[";
+        for (int i = 0; i < TAMANHO_BARRA; i++) {
+            if (i < cheios) {
+                barra = barra + "#";
+            } else {
+                barra = barra + "-";
+            }
+        }
+        return barra + "]";
     }
 }

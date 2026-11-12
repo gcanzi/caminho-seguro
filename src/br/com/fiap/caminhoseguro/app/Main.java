@@ -43,13 +43,30 @@ public class Main {
         CalculadoraRisco calculadora = new CalculadoraRisco();
         Roteirizador roteirizador = new Roteirizador(calculadora);
 
+        imprimirBanner(cenario);
         imprimirBairro(cenario);
         imprimirOcorrencias(cenario);
         imprimirRiscos(cenario, calculadora);
         imprimirRotas(cenario, roteirizador);
+        imprimirRecomendacao(cenario, calculadora, roteirizador);
         imprimirPedidoAjuda(cenario);
         imprimirPontosApoio(cenario);
         testarValidacoes(cenario);
+    }
+
+    /**
+     * Imprime o cabecalho do app com o objetivo e o bairro do piloto
+     *
+     * @param cenario cenario simulado da Bela Vista
+     */
+    private static void imprimirBanner(CenarioBelaVista cenario) {
+        System.out.println("============================================================");
+        System.out.println("  CAMINHO SEGURO");
+        System.out.println("  Rota mais segura de A ate B e Ponto Seguro mais proximo");
+        System.out.println("  Piloto: " + cenario.getBairro().getNome() + ", " + cenario.getBairro().getCidade()
+                + " | ODS 3, 10 e 11 | dados simulados");
+        System.out.println("============================================================");
+        System.out.println();
     }
 
     /**
@@ -144,7 +161,8 @@ public class Main {
         System.out.println("===== ROTAS TRIANON-MASP ATE RUA TREZE DE MAIO - " + usuario.getApelido().toUpperCase()
                 + " (" + usuario.getPerfil().getNome().toUpperCase() + ") AS " + hora + "H =====");
         for (RotaConsultada rota : rotas) {
-            System.out.println(rota + " | custo " + Formatacao.decimal(roteirizador.calcularCusto(rota, ALFA)));
+            System.out.println(Formatacao.barra(rota.getNotaSeguranca(), Roteirizador.NOTA_MAXIMA) + " " + rota
+                    + " | custo " + Formatacao.decimal(roteirizador.calcularCusto(rota, ALFA)));
             if (mostrarMotivos) {
                 for (String motivo : rota.getMotivos()) {
                     System.out.println("   - " + motivo);
@@ -155,6 +173,55 @@ public class Main {
         System.out.println("Mais segura: " + roteirizador.escolherMaisSegura(rotas).getDescricao());
         System.out.println("Equilibrada (alfa " + Formatacao.decimal(ALFA) + "): "
                 + roteirizador.escolherEquilibrada(rotas, ALFA).getDescricao());
+        System.out.println();
+    }
+
+    /**
+     * Imprime a recomendacao final para o primeiro usuario a noite: a rota equilibrada,
+     * quanto ela custa a mais que a rota mais rapida e quais trechos evitar
+     *
+     * @param cenario cenario simulado da Bela Vista
+     * @param calculadora calculadora de risco dos trechos
+     * @param roteirizador servico que avalia e escolhe as rotas
+     */
+    private static void imprimirRecomendacao(CenarioBelaVista cenario, CalculadoraRisco calculadora,
+                                             Roteirizador roteirizador) {
+        Usuario usuario = cenario.getUsuarios().get(0);
+        LocalDateTime noite = CenarioBelaVista.NOITE;
+        int hora = noite.getHour();
+        ArrayList<RotaConsultada> rotas = cenario.getRotas();
+        roteirizador.avaliarRotas(rotas, hora, noite, usuario.getPerfil());
+        RotaConsultada rapida = roteirizador.escolherMaisRapida(rotas);
+        RotaConsultada sugerida = roteirizador.escolherEquilibrada(rotas, ALFA);
+
+        System.out.println("===== RECOMENDACAO PARA " + usuario.getApelido().toUpperCase() + " ("
+                + usuario.getPerfil().getNome().toUpperCase() + ") AS " + hora + "H =====");
+        System.out.println("Siga pela rota: " + sugerida.getDescricao());
+        System.out.print(Formatacao.barra(sugerida.getNotaSeguranca(), Roteirizador.NOTA_MAXIMA) + " nota "
+                + Formatacao.decimal(sugerida.getNotaSeguranca()) + "/100");
+        if (sugerida == rapida) {
+            System.out.println(" | ja e tambem a rota mais rapida");
+        } else {
+            int metrosAMais = sugerida.calcularDistanciaTotal() - rapida.calcularDistanciaTotal();
+            double pontosAMais = sugerida.getNotaSeguranca() - rapida.getNotaSeguranca();
+            System.out.println(" | " + metrosAMais + " m a mais que a mais rapida, com "
+                    + Formatacao.decimal(pontosAMais) + " pontos a mais de seguranca");
+        }
+
+        String evitar = "";
+        for (Trecho trecho : cenario.getTrechoRepositorio().listarTodos()) {
+            double risco = calculadora.calcularRisco(trecho, hora, noite, usuario.getPerfil());
+            if (NivelRisco.classificar(risco) == NivelRisco.ALTO) {
+                if (!evitar.isEmpty()) {
+                    evitar = evitar + ", ";
+                }
+                evitar = evitar + trecho.getNomeRua() + " (" + Formatacao.decimal(risco) + ")";
+            }
+        }
+        if (!evitar.isEmpty()) {
+            System.out.println("Evite os trechos de risco alto: " + evitar);
+        }
+        System.out.println("Se sentir perigo no caminho, use o botao Me sinto insegura para achar um Ponto Seguro");
         System.out.println();
     }
 
