@@ -15,6 +15,7 @@ import br.com.fiap.caminhoseguro.dominio.TransportePublico;
 import br.com.fiap.caminhoseguro.dominio.Trecho;
 import br.com.fiap.caminhoseguro.dominio.Usuario;
 import br.com.fiap.caminhoseguro.enums.Iluminacao;
+import br.com.fiap.caminhoseguro.enums.NivelRisco;
 import br.com.fiap.caminhoseguro.enums.TipoOcorrencia;
 import br.com.fiap.caminhoseguro.enums.TipoPontoApoio;
 import br.com.fiap.caminhoseguro.repositorio.OcorrenciaRepositorio;
@@ -160,8 +161,8 @@ public class Main {
         for (Trecho trecho : trechoRepositorio.listarTodos()) {
             double risco15 = calculadora.calcularRisco(trecho, 15, agora15, lua.getPerfil());
             double risco23 = calculadora.calcularRisco(trecho, 23, agora23, lua.getPerfil());
-            System.out.println(trecho.getNomeRua() + ": " + formatar(risco15) + " as 15h | "
-                    + formatar(risco23) + " as 23h");
+            System.out.println(trecho.getNomeRua() + ": " + formatarRisco(risco15) + " as 15h | "
+                    + formatarRisco(risco23) + " as 23h");
             for (String motivo : calculadora.explicarRisco(trecho, 23, agora23)) {
                 System.out.println("   - " + motivo);
             }
@@ -345,6 +346,10 @@ public class Main {
         System.out.println("Equilibrada (alfa " + formatar(ALFA) + "): "
                 + roteirizador.escolherEquilibrada(rotas, ALFA).getDescricao());
         System.out.println();
+    }
+
+    private static String formatarRisco(double risco) {
+        return formatar(risco) + " (" + NivelRisco.classificar(risco).getDescricao() + ")";
     }
 
     private static String formatar(double valor) {
