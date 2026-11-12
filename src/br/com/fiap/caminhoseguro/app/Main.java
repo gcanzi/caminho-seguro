@@ -144,7 +144,6 @@ public class Main {
 
         System.out.println("===== OCORRENCIAS REGISTRADAS (PESO AS 23H) =====");
         for (Ocorrencia ocorrencia : ocorrenciaRepositorio.listarTodos()) {
-            // polimorfismo: cada subclasse calcula o peso e se descreve do seu jeito
             System.out.println(ocorrencia + " -> peso " + formatar(ocorrencia.calcularPeso(agora23)));
         }
         System.out.println("Ocorrencias por trecho:");
