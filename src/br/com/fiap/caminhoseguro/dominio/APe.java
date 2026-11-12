@@ -11,6 +11,11 @@ import br.com.fiap.caminhoseguro.enums.Iluminacao;
  */
 public class APe implements PerfilDeslocamento {
 
+    /** Multiplicador do risco a noite em trecho com iluminacao ruim (+30%) */
+    public static final double FATOR_NOITE_ILUMINACAO_RUIM = 1.3;
+    /** Multiplicador do risco a noite em trecho com iluminacao regular (+10%) */
+    public static final double FATOR_NOITE_ILUMINACAO_REGULAR = 1.1;
+
     /**
      * Cria o perfil a pe
      */
@@ -39,9 +44,9 @@ public class APe implements PerfilDeslocamento {
     public double ajustarRisco(Trecho trecho, double riscoBase, int hora) {
         if (Horario.ehNoite(hora)) {
             if (trecho.getIluminacao() == Iluminacao.RUIM) {
-                return riscoBase * 1.3;
+                return riscoBase * FATOR_NOITE_ILUMINACAO_RUIM;
             } else if (trecho.getIluminacao() == Iluminacao.REGULAR) {
-                return riscoBase * 1.1;
+                return riscoBase * FATOR_NOITE_ILUMINACAO_REGULAR;
             }
         }
         return riscoBase;

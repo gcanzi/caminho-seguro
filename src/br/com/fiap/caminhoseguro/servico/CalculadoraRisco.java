@@ -35,7 +35,7 @@ public class CalculadoraRisco {
     }
 
     /**
-     * Calcula a penalidade da iluminacao: BOA 0, REGULAR 1 e RUIM 3, multiplicada por 1.5 a noite
+     * Calcula a penalidade da iluminacao (definida no enum Iluminacao), multiplicada por 1.5 a noite
      *
      * @param iluminacao iluminacao do trecho
      * @param hora hora do deslocamento, de 0 a 23
@@ -44,12 +44,7 @@ public class CalculadoraRisco {
      * @throws IllegalArgumentException se a hora estiver fora de 0 a 23
      */
     public double calcularPenalidadeIluminacao(Iluminacao iluminacao, int hora) {
-        double penalidade = 0;
-        if (iluminacao == Iluminacao.REGULAR) {
-            penalidade = 1;
-        } else if (iluminacao == Iluminacao.RUIM) {
-            penalidade = 3;
-        }
+        double penalidade = iluminacao.getPenalidade();
         if (Horario.ehNoite(hora)) {
             penalidade = penalidade * MULTIPLICADOR_NOITE;
         }
@@ -126,7 +121,7 @@ public class CalculadoraRisco {
                 if (ocorrencia.getTipo() == tipo) {
                     if (ocorrencia instanceof ReportComunitario) {
                         ReportComunitario report = (ReportComunitario) ocorrencia;
-                        if (report.calcularFatorTempo(agora) < 1.0) {
+                        if (report.calcularFatorTempo(agora) < ReportComunitario.FATOR_RECENTE) {
                             antigos++;
                         } else if (report.estaConfirmado()) {
                             recentesConfirmados++;
@@ -152,7 +147,7 @@ public class CalculadoraRisco {
             }
             if (antigos > 0) {
                 motivos.add(rua + ": " + contar(antigos, "report antigo", "reports antigos")
-                        + " de " + nomeTipo + " (mais de 24 h, peso reduzido)");
+                        + " de " + nomeTipo + " (mais de " + ReportComunitario.HORAS_RECENTE + " h, peso reduzido)");
             }
             if (oficiais > 0) {
                 motivos.add(rua + ": " + contar(oficiais, "ocorrencia oficial", "ocorrencias oficiais")

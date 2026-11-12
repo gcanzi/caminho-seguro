@@ -19,6 +19,11 @@ import java.util.ArrayList;
  */
 public class RoteirizadorService {
 
+    /** Maior nota de seguranca de uma rota, quando o risco e 0 */
+    public static final double NOTA_MAXIMA = 100.0;
+    /** Pontos perdidos na nota para cada ponto de risco */
+    public static final double PONTOS_POR_RISCO = 10.0;
+
     private CalculadoraRisco calculadora;
 
     /**
@@ -67,7 +72,7 @@ public class RoteirizadorService {
      */
     public void avaliarRota(RotaConsultada rota, int hora, LocalDateTime agora, PerfilDeslocamento perfil) {
         double riscoMedio = calcularRiscoMedio(rota, hora, agora, perfil);
-        rota.setNotaSeguranca(100 - riscoMedio * 10);
+        rota.setNotaSeguranca(NOTA_MAXIMA - riscoMedio * PONTOS_POR_RISCO);
 
         rota.limparMotivos();
         for (Trecho trecho : rota.getTrechos()) {
@@ -108,8 +113,8 @@ public class RoteirizadorService {
         if (alfa < 0) {
             throw new IllegalArgumentException("Alfa nao pode ser negativo, recebido: " + alfa);
         }
-        double riscoMedio = (100 - rota.getNotaSeguranca()) / 10;
-        return rota.calcularDistanciaTotal() * (1 + alfa * riscoMedio / 10);
+        double riscoMedio = (NOTA_MAXIMA - rota.getNotaSeguranca()) / PONTOS_POR_RISCO;
+        return rota.calcularDistanciaTotal() * (1 + alfa * riscoMedio / CalculadoraRisco.RISCO_MAXIMO);
     }
 
     /**

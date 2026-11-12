@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 public class OcorrenciaOficial extends Ocorrencia {
 
     private String fonte;
+    /** Gravidade media: com ela o peso da ocorrencia fica igual ao peso do tipo */
+    public static final double GRAVIDADE_REFERENCIA = 3.0;
+
     private int gravidade;
 
     /**
@@ -43,7 +46,7 @@ public class OcorrenciaOficial extends Ocorrencia {
      */
     @Override
     public double calcularPeso(LocalDateTime agora) {
-        return getTipo().getPeso() * gravidade / 3.0;
+        return getTipo().getPeso() * gravidade / GRAVIDADE_REFERENCIA;
     }
 
     /**

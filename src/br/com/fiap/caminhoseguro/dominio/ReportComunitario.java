@@ -16,6 +16,18 @@ public class ReportComunitario extends Ocorrencia {
 
     /** Quantidade minima de confirmacoes para o report ter peso cheio */
     public static final int MINIMO_CONFIRMACOES = 2;
+    /** Ate quantas horas o report e considerado recente */
+    public static final int HORAS_RECENTE = 24;
+    /** Ate quantas horas o report ainda tem peso intermediario */
+    public static final int HORAS_INTERMEDIARIO = 72;
+    /** Fator de tempo de um report recente */
+    public static final double FATOR_RECENTE = 1.0;
+    /** Fator de tempo de um report intermediario */
+    public static final double FATOR_INTERMEDIARIO = 0.5;
+    /** Fator de tempo de um report antigo */
+    public static final double FATOR_ANTIGO = 0.2;
+    /** Multiplicador do peso enquanto o report nao tem o minimo de confirmacoes */
+    public static final double FATOR_SEM_CONFIRMACAO = 0.5;
 
     private Usuario autor;
     private ArrayList<Usuario> confirmacoes;
@@ -74,12 +86,12 @@ public class ReportComunitario extends Ocorrencia {
      */
     public double calcularFatorTempo(LocalDateTime agora) {
         long horas = calcularHorasDesde(agora);
-        if (horas <= 24) {
-            return 1.0;
-        } else if (horas <= 72) {
-            return 0.5;
+        if (horas <= HORAS_RECENTE) {
+            return FATOR_RECENTE;
+        } else if (horas <= HORAS_INTERMEDIARIO) {
+            return FATOR_INTERMEDIARIO;
         } else {
-            return 0.2;
+            return FATOR_ANTIGO;
         }
     }
 
@@ -93,7 +105,7 @@ public class ReportComunitario extends Ocorrencia {
     public double calcularPeso(LocalDateTime agora) {
         double peso = getTipo().getPeso() * calcularFatorTempo(agora);
         if (!estaConfirmado()) {
-            peso = peso * 0.5;
+            peso = peso * FATOR_SEM_CONFIRMACAO;
         }
         return peso;
     }
