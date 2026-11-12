@@ -2,12 +2,9 @@ package br.com.fiap.caminhoseguro.servico;
 
 import br.com.fiap.caminhoseguro.dominio.Horario;
 import br.com.fiap.caminhoseguro.dominio.Ocorrencia;
-import br.com.fiap.caminhoseguro.dominio.OcorrenciaOficial;
 import br.com.fiap.caminhoseguro.dominio.PerfilDeslocamento;
-import br.com.fiap.caminhoseguro.dominio.ReportComunitario;
 import br.com.fiap.caminhoseguro.dominio.Trecho;
 import br.com.fiap.caminhoseguro.enums.Iluminacao;
-import br.com.fiap.caminhoseguro.enums.TipoOcorrencia;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -68,7 +65,6 @@ public class CalculadoraRisco {
         }
         double risco = 0;
         for (Ocorrencia ocorrencia : trecho.getOcorrencias()) {
-            // polimorfismo: report e ocorrencia oficial calculam o peso de formas diferentes
             risco = risco + ocorrencia.calcularPeso(agora);
         }
         risco = risco + calcularPenalidadeIluminacao(trecho.getIluminacao(), hora);
@@ -109,62 +105,25 @@ public class CalculadoraRisco {
             motivos.add(texto);
         }
 
-        // agrupa as ocorrencias por tipo para gerar frases como "2 reports recentes de assedio confirmados"
-        for (TipoOcorrencia tipo : TipoOcorrencia.values()) {
-            int recentesConfirmados = 0;
-            int recentesSemConfirmacao = 0;
-            int antigos = 0;
-            int oficiais = 0;
-            String fonte = "";
-
-            for (Ocorrencia ocorrencia : trecho.getOcorrencias()) {
-                if (ocorrencia.getTipo() == tipo) {
-                    if (ocorrencia instanceof ReportComunitario) {
-                        ReportComunitario report = (ReportComunitario) ocorrencia;
-                        if (report.calcularFatorTempo(agora) < ReportComunitario.FATOR_RECENTE) {
-                            antigos++;
-                        } else if (report.estaConfirmado()) {
-                            recentesConfirmados++;
-                        } else {
-                            recentesSemConfirmacao++;
-                        }
-                    } else if (ocorrencia instanceof OcorrenciaOficial) {
-                        OcorrenciaOficial oficial = (OcorrenciaOficial) ocorrencia;
-                        oficiais++;
-                        fonte = oficial.getFonte();
-                    }
-                }
+        ArrayList<String> textos = new ArrayList<String>();
+        ArrayList<Integer> quantidades = new ArrayList<Integer>();
+        for (Ocorrencia ocorrencia : trecho.getOcorrencias()) {
+            String texto = ocorrencia.explicarMotivo(agora);
+            int posicao = textos.indexOf(texto);
+            if (posicao == -1) {
+                textos.add(texto);
+                quantidades.add(1);
+            } else {
+                quantidades.set(posicao, quantidades.get(posicao) + 1);
             }
-
-            String nomeTipo = tipo.getDescricao();
-            if (recentesConfirmados > 0) {
-                motivos.add(rua + ": " + contar(recentesConfirmados, "report recente", "reports recentes")
-                        + " de " + nomeTipo + " " + escolher(recentesConfirmados, "confirmado", "confirmados"));
+        }
+        for (int i = 0; i < textos.size(); i++) {
+            String quantidade = "";
+            if (quantidades.get(i) > 1) {
+                quantidade = quantidades.get(i) + "x ";
             }
-            if (recentesSemConfirmacao > 0) {
-                motivos.add(rua + ": " + contar(recentesSemConfirmacao, "report recente", "reports recentes")
-                        + " de " + nomeTipo + " ainda sem confirmacao (peso reduzido)");
-            }
-            if (antigos > 0) {
-                motivos.add(rua + ": " + contar(antigos, "report antigo", "reports antigos")
-                        + " de " + nomeTipo + " (mais de " + ReportComunitario.HORAS_RECENTE + " h, peso reduzido)");
-            }
-            if (oficiais > 0) {
-                motivos.add(rua + ": " + contar(oficiais, "ocorrencia oficial", "ocorrencias oficiais")
-                        + " de " + nomeTipo + " (" + fonte + ")");
-            }
+            motivos.add(rua + ": " + quantidade + textos.get(i));
         }
         return motivos;
-    }
-
-    private String contar(int quantidade, String singular, String plural) {
-        return quantidade + " " + escolher(quantidade, singular, plural);
-    }
-
-    private String escolher(int quantidade, String singular, String plural) {
-        if (quantidade == 1) {
-            return singular;
-        }
-        return plural;
     }
 }

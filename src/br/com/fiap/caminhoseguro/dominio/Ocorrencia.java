@@ -48,6 +48,14 @@ public abstract class Ocorrencia {
     public abstract double calcularPeso(LocalDateTime agora);
 
     /**
+     * Explica em linguagem simples por que a ocorrencia aumenta o risco do trecho
+     *
+     * @param agora data e hora de referencia da consulta
+     * @return frase curta com o motivo, sem o nome da rua
+     */
+    public abstract String explicarMotivo(LocalDateTime agora);
+
+    /**
      * Calcula quantas horas se passaram desde a ocorrencia
      *
      * @param agora data e hora de referencia da consulta

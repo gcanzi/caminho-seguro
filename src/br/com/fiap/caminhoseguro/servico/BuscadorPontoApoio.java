@@ -1,6 +1,5 @@
 package br.com.fiap.caminhoseguro.servico;
 
-import br.com.fiap.caminhoseguro.dominio.EstabelecimentoParceiro;
 import br.com.fiap.caminhoseguro.dominio.PontoApoio;
 import br.com.fiap.caminhoseguro.dominio.Validacao;
 import br.com.fiap.caminhoseguro.repositorio.PontoApoioRepositorio;
@@ -82,12 +81,7 @@ public class BuscadorPontoApoio {
             if (!ponto.estaAberto(hora)) {
                 descartes.add(ponto.getNome() + ": fechado as " + hora + "h (" + ponto.descreverHorario() + ")");
             } else if (!ponto.podeSerSugerido()) {
-                String motivo = "nao pode ser sugerido";
-                if (ponto instanceof EstabelecimentoParceiro) {
-                    EstabelecimentoParceiro parceiro = (EstabelecimentoParceiro) ponto;
-                    motivo = parceiro.descreverSituacao();
-                }
-                descartes.add(ponto.getNome() + ": " + motivo);
+                descartes.add(ponto.getNome() + ": " + ponto.descreverSituacao());
             }
         }
         return descartes;

@@ -58,6 +58,13 @@ public abstract class PontoApoio {
     public abstract boolean podeSerSugerido();
 
     /**
+     * Descreve a situacao do ponto, usada para explicar por que ele pode ou nao ser sugerido
+     *
+     * @return texto curto com a situacao do ponto
+     */
+    public abstract String descreverSituacao();
+
+    /**
      * Verifica se o ponto esta aberto na hora informada, tratando horario que vira a meia-noite e 24 horas
      *
      * @param hora hora da consulta, de 0 a 23

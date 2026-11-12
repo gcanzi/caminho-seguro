@@ -111,6 +111,24 @@ public class ReportComunitario extends Ocorrencia {
     }
 
     /**
+     * Explica o motivo dizendo se o report e recente, antigo ou ainda sem confirmacao
+     *
+     * @param agora data e hora de referencia da consulta
+     * @return frase com o tipo e a situacao do report
+     */
+    @Override
+    public String explicarMotivo(LocalDateTime agora) {
+        String tipo = getTipo().getDescricao();
+        if (calcularFatorTempo(agora) < FATOR_RECENTE) {
+            return "report antigo de " + tipo + " (mais de " + HORAS_RECENTE + " h, peso reduzido)";
+        } else if (estaConfirmado()) {
+            return "report recente de " + tipo + " confirmado";
+        } else {
+            return "report recente de " + tipo + " ainda sem confirmacao (peso reduzido)";
+        }
+    }
+
+    /**
      * Descreve o report com o autor e as confirmacoes
      *
      * @return texto do report

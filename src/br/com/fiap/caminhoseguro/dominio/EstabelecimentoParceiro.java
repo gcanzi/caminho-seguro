@@ -86,6 +86,7 @@ public class EstabelecimentoParceiro extends PontoApoio {
      *
      * @return texto da situacao
      */
+    @Override
     public String descreverSituacao() {
         if (!verificado) {
             return "nao verificado";

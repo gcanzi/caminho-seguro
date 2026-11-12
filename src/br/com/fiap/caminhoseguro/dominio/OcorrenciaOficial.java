@@ -50,6 +50,17 @@ public class OcorrenciaOficial extends Ocorrencia {
     }
 
     /**
+     * Explica o motivo citando a fonte oficial
+     *
+     * @param agora data e hora de referencia da consulta
+     * @return frase com o tipo e a fonte da ocorrencia
+     */
+    @Override
+    public String explicarMotivo(LocalDateTime agora) {
+        return "ocorrencia oficial de " + getTipo().getDescricao() + " (" + fonte + ")";
+    }
+
+    /**
      * Descreve a ocorrencia com a fonte e a gravidade
      *
      * @return texto da ocorrencia oficial

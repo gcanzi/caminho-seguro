@@ -53,12 +53,22 @@ public class OrgaoPublico extends PontoApoio {
     }
 
     /**
+     * Orgao publico nao depende de verificacao nem de avaliacoes
+     *
+     * @return "orgao publico"
+     */
+    @Override
+    public String descreverSituacao() {
+        return "orgao publico";
+    }
+
+    /**
      * Mostra o orgao publico em uma linha
      *
      * @return texto do ponto com a indicacao de orgao publico
      */
     @Override
     public String toString() {
-        return super.toString() + " | orgao publico";
+        return super.toString() + " | " + descreverSituacao();
     }
 }
